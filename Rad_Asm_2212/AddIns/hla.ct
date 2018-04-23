@@ -1,0 +1,3 @@
+{Close Dialog}
+w.SendMessage (hwnd, WM_CLOSE, 0, 0);
+{}

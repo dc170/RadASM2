@@ -1,0 +1,17 @@
+#define IDR_MENU 600
+IDR_MENU MENUEX
+BEGIN
+  POPUP "&File",,,
+  BEGIN
+    MENUITEM "&Exit",1000,,
+  END
+  POPUP "&Run In Thread",,,
+  BEGIN
+    MENUITEM "Start Thread Function",1200,,
+    MENUITEM "Stop Thread Function",1300,,
+  END
+  POPUP "&Help",,,
+  BEGIN
+    MENUITEM "&About",1900,,
+  END
+END

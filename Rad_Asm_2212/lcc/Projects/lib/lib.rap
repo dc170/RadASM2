@@ -1,0 +1,114 @@
+[Project]
+Assembler=Lcc
+Type=LIB Project
+Description=lib
+Backup=$P\Bak\
+Group=1
+GroupExpand=1
+Debug=0
+[Files]
+1=lib.cpp
+2=lib.h
+3=lib.Def
+[MakeFiles]
+0=lib.rap
+1=lib.rc
+2=lib.cpp
+3=lib.obj
+4=lib.res
+5=lib.exe
+6=lib.def
+7=lib.dll
+8=lib.txt
+9=lib.lib
+10=lib.mak
+11=lib.c
+12=lib.com
+13=lib.ocx
+14=lib.idl
+15=lib.tlb
+[MakeDef]
+Menu=0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+1=4,O,$B\LRC.EXE /v,1
+2=3,O,$B\LCC.EXE /O /unused /c /errout=error.txt /I"$I",2
+3=9,O,$B\LCCLIB.EXE /verbose /out:"$9",3
+4=0,0,,5
+5=rsrc.obj,O,$D\CVTRES.EXE,rsrc.res
+6=*.obj,O,$B\LCC.EXE /O /unused /c /errout=error.txt /I"$I",*.cpp
+7=0,0,"$E\OllyDbg",5
+11=4,O,$B\LRC.EXE /v,1
+12=3,O,$B\LCC.EXE /g2 /O /unused /c /errout=error.txt /I"$I",2
+13=9,O,$B\LCCLIB.EXE /verbose /out:"$9",3
+14=0,0,,5
+15=rsrc.obj,O,$D\CVTRES.EXE,rsrc.res
+16=*.obj,O,$B\LCC.EXE /g2 /O /unused /c /errout=error.txt /I"$I",*.cpp
+17=0,0,"$E\OllyDbg",5
+[Group]
+Group=Added files,Assembly,Resources,Misc,Modules
+1=2
+2=2
+3=4
+[VersionControl]
+Settings=1246
+重要事件=129
+MilestoneEvery=10
+MilestoneEveryCurrent=0
+MilestoneOnBuild=0.0.0.0
+MilestoneOnTime=2
+MilestoneOnDate=0
+MilestoneOnDateWhen=1
+MilestoneOnDateStatus=0
+MilestoneOnDateDate=8
+MilestoneOnDateTimeYear=2005
+MilestoneOnDateTimeMonth=11
+MilestoneOnDateTimeDate=3
+MilestoneOnDateTimeHour=15
+MilestoneOnDateTimeMin=26
+MilestoneOnDateTimeSec=26
+MilestoneOnDateTimeStatus=0
+BackupLocation=E:\RadASM\Lcc\Projects\VCBackups\
+CompressionLevel=0
+DefaultComment=工程 $N, $Z, 备份创建于 $D 在 $T.
+ExcludeExt1=\
+ExcludeExt2=\
+ExcludeExt3=\
+ExcludeExt4=\
+FileVerLength=4
+FileVer2Range=0
+FileVer3Range=0
+FileVer4Range=0
+ProductVerLength=4
+ProductVer2Range=0
+ProductVer3Range=0
+ProductVer4Range=0
+Milestones=129
+[Colref]
+0=00FFFFFF
+1=00FFFFFF
+2=00FFFFFF
+3=00FFFFFF
+4=00FFFFFF
+5=00FFFFFF
+6=00FFFFFF
+7=00FFFFFF
+[PTimer]
+PTimer=283407
+[Collapse]
+1=
+2=
+[Size]
+1=0,0,0,0,35
+2=0,0,0,0,0
+[BookMark]
+0=
+1=
+2=
+3=
+4=
+5=
+6=
+7=
+8=
+9=
+[BreakPoint]
+0=

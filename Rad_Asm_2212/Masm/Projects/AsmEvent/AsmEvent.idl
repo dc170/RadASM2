@@ -1,0 +1,50 @@
+// MyCom3.idl : IDL source for MyCom3.dll
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(F8CE5E41-1135-11d4-A324-0040F6D487D9),
+		dual,
+		helpstring("IMyCom2 Dispatch Interface"),
+		pointer_default(unique)
+	]
+	interface IMyCom2 : IDispatch
+	{
+		[propget, id(0), helpstring("property Value")] HRESULT Value([out, retval] long *pVal);
+		[propput, id(0), helpstring("property Value")] HRESULT Value([in] long newVal);
+		[id(1), helpstring("method Raise")] HRESULT Raise([in] long AddVal);
+	};
+
+[
+	uuid(BBCE2B81-FE99-11D5-A324-0050BA5A9F26),
+	helpstring("MyCom3 1.0 Type Library"),
+	version(1.0)
+]
+library MyCom3Lib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(2C23CB08-FA18-11D5-A324-0050BA5A9F26),
+		helpstring("IMyEventClass Dispatch Interface")
+	]
+	dispinterface _MyEventClass
+	{
+		properties:
+		methods:
+		[id(1), helpstring("Send events HERE")] HRESULT XMax();
+	};
+
+	[
+		uuid(BBCE2B80-FE99-11D5-A324-0050BA5A9F26),
+		helpstring("MyCom3 Class")
+	]
+	coclass MyCom3
+	{
+		[default] interface IMyCom2;
+            [source, default] interface _MyEventClass;
+	};
+};

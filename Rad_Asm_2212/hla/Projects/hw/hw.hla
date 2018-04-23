@@ -1,0 +1,12 @@
+program HelloWorld;
+
+#include( "stdlib.hhf" )
+
+begin HelloWorld;
+
+	stdout.put( "Hello, World of Assembly Language", nl, nl );
+	stdout.put( "Press enter to continue: " );
+	stdin.readLn();
+
+end HelloWorld;
+

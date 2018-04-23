@@ -1,0 +1,3 @@
+#include "Res/RAHexEdDlg.rc"
+#include "Res/RAHexEdMnu.rc"
+#include "Res/RAHexEdRes.rc"

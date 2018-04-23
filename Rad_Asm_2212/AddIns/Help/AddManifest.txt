@@ -1,0 +1,34 @@
+Add XP Manifest AddIn for RadAsm
+By QvasiModo (Mario Vilas)
+Version 1.01
+Last update 23-Sep-03
+
+-oOo-
+
+This Addin will generate the manifest data for your application. It will attempt to auto generate the data from the project options, but you still have the chance to change it as needed. The data is optionally exported to a .Manifest file and/or the resource script.
+
+-oOo-
+
+Installing the AddIn (using AddIn Manager):
+    1) Copy AddManifest.Dll to your addin folder (typically C:\RadAsm\AddIns)
+    2) Launch RadAsm, and go to Option -> Addin Manager
+    3) Select AddManifest from the list, click "Install"
+    4) Choose the options you want for the AddIn, then click "OK"
+
+Installing the AddIn (manually editing RadAsm.Ini):
+    1) Copy AddManifest.Dll to your addin folder (typically C:\RadAsm\AddIns)
+    2) Open RadAsm.Ini with a text editor (for example Notepad.exe)
+    3) Add the following entry to the [AddIns] section:
+        x=AddManifest.Dll,y,1
+       Where "x" is the next available number, and y is a number that represent the options. It is calculated by adding the following numbers:
+        1: Enable the addin
+        2: Add to resource script
+        4: Don't create manifest file
+    4) Restart RadAsm
+
+The addin will store manifest data in the project file under the key [Manifest]. When this data is not found, the default settings are taken from the [Manifest] section in RadAsm.Ini, and additionally the [VerInf] section in the project file, and the project description.
+
+-oOo-
+
+This program is freeware, and you are free to use, copy or redistribute in any way, provided no modifications are made to the original package, and I am given the proper credit. :)
+

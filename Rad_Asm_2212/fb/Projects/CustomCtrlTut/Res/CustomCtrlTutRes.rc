@@ -1,0 +1,2 @@
+#define IDB_BMP									100
+IDB_BMP						BITMAP    DISCARDABLE "Res/ToolBox.bmp"

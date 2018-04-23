@@ -1,0 +1,4 @@
+101						CURSOR    DISCARDABLE "Res/SplitH.cur"
+102						BITMAP    DISCARDABLE "Res/Bookmark.bmp"
+103						CURSOR    DISCARDABLE "Res/Select.cur"
+104						BITMAP    DISCARDABLE "Res/Linenumber.bmp"

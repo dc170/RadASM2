@@ -1,0 +1,27 @@
+{Dialog proc}
+begin DialogProc;
+
+	if ( uMsg = WM_CLOSE ) then
+
+		EndDialog ( hwnd, 0 );
+
+	elseif ( uMsg = WM_COMMAND ) then
+
+		if ( wParam = IDC_BTNEXIT ) then
+
+			SendMessage (hwnd, WM_CLOSE, 0, 0);
+
+		endif;
+
+	else
+
+		mov ( 0 , eax );
+		exit DialogProc;
+
+	endif;
+
+	mov ( 1, eax );
+
+end DialogProc;
+~
+{}

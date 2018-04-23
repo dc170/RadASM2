@@ -1,0 +1,45 @@
+Ok, i lied, it's not that simple, you have to: 
+
+1) compile the object(s) without linking (-c), adding your DllMain like: 
+
+Code: 
+'' compile as: fbc -c mydll.bas 
+#include once "windows.bi" 
+#include once "crt.bi" 
+
+function DllMain alias "DllMain" ( byval hModule as HANDLE, _ 
+                               byval ul_reason_for_call as DWORD, _ 
+                                   byval lpReserved as LPVOID _ 
+                                 ) as BOOL 
+                                       
+   select case ul_reason_for_call 
+   case DLL_PROCESS_ATTACH 
+      puts "hello!" 
+   case else 
+      puts "bye!" 
+   end select 
+
+   function = TRUE 
+
+end function 
+
+
+sub myfunc export 
+   puts "ok" 
+end sub 
+
+
+2) link the object(s): fbc -dll mydll.o 
+
+3) never call from that DLL any FB function that needs implicit initializations (ie: the console functions like PRINT). 
+
+4) test it :P 
+
+Code: 
+'' compile as: fbc test.bas 
+declare sub myfunc lib "mydll" 
+   print "before myfunc()" 
+   myfunc 
+   print "after myfunc()" 
+ 
+  

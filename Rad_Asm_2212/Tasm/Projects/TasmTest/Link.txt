@@ -1,0 +1,5 @@
+tlink32 -x /V4.0 /Tpe /aa /c file_name.obj,file_name.exe,,import32.lib,,file_name.res
+5,OT,$B\tlink32.EXE -x /V4.0 /Tpe /aa /c /L:"$L",3,|,5,||import32.lib||,4
+
+
+5,OT,$B\tlink32.EXE /x /V4.0 /Tpe /aa /c /L:"$L",3,|||||,4

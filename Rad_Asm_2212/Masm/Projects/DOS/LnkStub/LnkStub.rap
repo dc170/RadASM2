@@ -1,0 +1,120 @@
+[Project]
+Assembler=masm
+Type=Console App
+Description=LnkStub
+Backup=$P\Bak\
+Group=1
+GroupExpand=1
+Ver.rc=1
+Debug=0
+
+[Files]
+1=LnkStub.Asm
+2=
+
+[MakeFiles]
+0=LnkStub.rap
+1=LnkStub.rc
+2=LnkStub.asm
+3=LnkStub.obj
+4=LnkStub.res
+5=LnkStub.exe
+6=LnkStub.def
+7=LnkStub.dll
+8=LnkStub.txt
+9=LnkStub.lib
+10=LnkStub.mak
+11=LnkStub.hla
+12=LnkStub.com
+
+[MakeDef]
+Menu=0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0
+1=4,O,$B\RC.EXE /v,1
+2=3,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",2
+3=5,O,$B\LINK.EXE /SUBSYSTEM:CONSOLE /RELEASE /VERSION:4.0 /LIBPATH:"$L" /OUT:"$5",3
+4=0,0,,5,"Test"
+5=rsrc.obj,O,$B\CVTRES.EXE,rsrc.res
+7=0,0,$E\OllyDbg,5
+6=*.obj,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",*.asm
+11=4,O,$B\RC.EXE /v,1
+12=3,O,$B\ML.EXE /c /coff /Cp /Zi /nologo /I"$I",2
+13=5,O,$B\LINK.EXE /SUBSYSTEM:CONSOLE /DEBUG /VERSION:4.0 /LIBPATH:"$L" /OUT:"$5",3
+14=0,0,,5
+15=rsrc.obj,O,$B\CVTRES.EXE,rsrc.res
+16=*.obj,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",*.asm
+17=0,0,$E\OllyDbg,5
+
+[Group]
+Group=Added files,Assembly,Resources,Misc,Modules
+1=2
+2=
+
+[VerInf]
+FV=0.0.0.1
+FileVersion=0.0.0.1
+PV=0.0.0.1
+ProductVersion=0.0.0.1
+
+[VersionControl]
+Settings=1278
+Milestones=129
+MilestoneEvery=10
+MilestoneEveryCurrent=4
+MilestoneOnBuild=0.0.0.0
+MilestoneOnTime=2
+MilestoneOnDate=0
+MilestoneOnDateWhen=1
+MilestoneOnDateStatus=0
+MilestoneOnDateDate=13
+MilestoneOnDateTimeYear=2004
+MilestoneOnDateTimeMonth=6
+MilestoneOnDateTimeDate=2
+MilestoneOnDateTimeHour=21
+MilestoneOnDateTimeMin=20
+MilestoneOnDateTimeSec=39
+MilestoneOnDateTimeStatus=0
+BackupLocation=C:\RADASM\Masm\Projects\VCBackups\
+CompressionLevel=0
+DefaultComment=Project $N, $Z, Backup Created On $D At $T.
+ExcludeExt1=\
+ExcludeExt2=\
+ExcludeExt3=\
+ExcludeExt4=\
+FileVerLength=4
+FileVer2Range=0
+FileVer3Range=0
+FileVer4Range=0
+ProductVerLength=4
+ProductVer2Range=0
+ProductVer3Range=0
+ProductVer4Range=0
+
+[Size]
+2=
+1=0,0,0,0,140
+
+[Colref]
+0=00FFFFFF
+1=00FFFFFF
+2=00FFFFFF
+3=00FFFFFF
+4=00FFFFFF
+5=00FFFFFF
+6=00FFFFFF
+7=00FFFFFF
+
+[BookMark]
+0=
+1=
+2=
+3=
+4=
+5=
+6=
+7=
+8=
+9=
+
+
+[BreakPoint]
+0=

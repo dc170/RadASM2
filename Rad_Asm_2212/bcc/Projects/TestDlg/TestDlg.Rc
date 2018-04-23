@@ -1,0 +1,3 @@
+#include "Res/TestDlgLng.rc"
+#include "Res/TestDlgDlg.rc"
+#include "Res/TestDlgRes.rc"

@@ -1,0 +1,38 @@
+Script editor addin to RadAsm to generat scripts for the NSIS installer maker.
+
+Install:
+
+1. Download (http://nsis.sourceforge.net/download/) and install NSIS
+2. Copy NSISScriptEditor.dll to RadASM\Addins folder.
+3. Start RadASM and use Options / AddinManager to activate NSISScriptEditor.
+
+Description:
+
+Four menuitems are added to RadAsm
+
+1. Menu "Option/Nullsoft Scriptable Install System" 
+Open a dialog window containing a link to NSIS download page, button to open
+the NSIS menu, button to open NSIS help file and a button to show NSIS
+license text.
+
+2. Menu "Project/Compile installer"
+I had rather placed this menu under the Make menu, but I didn't succeed.
+If the project has registred more than one script file a dialog box with
+registred files are shown. Choose file to compile.
+
+3. Menu "Project/Add existing/Open installer script"
+Open existing files. The file will be added to the project and opened.
+
+4. Menu "Project/Add new/New installer script"
+Create script file with wizard. First page you can choose an empty script file,
+a script file from a template or a scriptfile from wizard.
+
+Source code is included.
+
+Place template files in template directory of RadAsm
+
+Add ".nsi" to Code Files on Code Editor Options dialog to coloring the script files.
+
+Add coloring keywords to Colors & Keywords dialog.
+
+makensis.exe reports are piped to RadAsm output window.

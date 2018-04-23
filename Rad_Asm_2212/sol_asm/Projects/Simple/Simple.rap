@@ -1,0 +1,57 @@
+[Project]
+Assembler=tasm
+Type=Win32 App
+Description=Simple tasm project
+Backup=$P\Bak\
+Group=1
+GroupExpand=1
+Debug=0
+
+[MakeDef]
+Menu=0,1,1,1,1,1,0,0
+1=4,O,$B\brcc32.exe -r -i"$I" -v,1
+2=3,O,$B\tasm32.EXE /mx /m4 /z /q /zn  /I"$I",2
+3=5,O,$B\tlink32.EXE /x /V4.0 /Tpe /aa /c /L"$L",3,|||||
+4=0,0,,5
+5=
+6=*.obj,O,$B\tasm32.EXE /mx /m4 /z /q /zn  /I"$I",*.asm
+11=4,O,$B\brcc32.exe -r -i"$I" -v,1
+12=3,O,$B\tasm32.EXE /mx /m4 /z /q /zn  /I"$I",2
+13=5,O,$B\tlink32.EXE /x /V4.0 /Tpe /aa /c /L"$L",3,|||||,4
+14=0,0,,5
+15=
+16=*.obj,O,$B\tasm32.EXE /mx /m4 /z /q /zn  /I"$I",*.asm
+
+[MakeFiles]
+0=Simple.rap
+1=Simple.rc
+2=Simple.asm
+3=Simple.obj
+4=Simple.res
+5=Simple.exe
+6=Simple.def
+7=Simple.dll
+8=Simple.txt
+9=Simple.lib
+10=Simple.mak
+
+[Files]
+1=Simple.Asm
+
+[Size]
+1=2147483648,2147483648,2147483648,2147483648,277
+
+[BookMark]
+0=
+1=
+2=
+3=
+4=
+5=
+6=
+7=
+8=
+9=
+
+
+[BreakPoint]

@@ -1,0 +1,38 @@
+How are you doing Ketil?
+
+Well I am finally back from my winter job and have had time to review the message board for any suggestions on my addin. Here is the latest version with all the changes listed below...
+
+1) As per Donkey's suggestion, version control updating is now automatically
+   disabled when compile RC from project options is not checked. (Sorry about
+   that, I so rarely start a project without a resource file, that it never occurred to
+   me to check for that, anyhow that is now fixed!)
+
+2) Version Control is now less aggressive! Version updating and Milestone
+   Monitoring are now disabled by default on new projects. I noticed a few people
+   have complained about that. That's my fault as well, I set the default settings
+   to the way I prefer to work on projects which is not the way everyone else likes
+   too. (Me Bad) Actually SubEvil made the suggestion of an INI file for the default
+   settings and I plan on adding that to the next version. That will allow every user
+   to set version control to use default settings on all new projects!! Eventually I'll
+   release the code, but not till I have cleaned up the code, added comments, and
+   given credit where due... That may take a while though as the project has grown
+   much larger than I originally planned--Go Figure!
+
+3) Fixed another bug that apparently nobody noticed? I was not handling my addins
+   menu item correctly. Under certain circumstances, Version Control's menu item
+   should be disabled and was not. This would cause RadASM to GPF if my addin
+   was selected from the menu. I am not sure what happened here as it worked ok
+   when I initially released it, anyhow it now works as it should..
+   Grayed --- No Project Loaded
+   Enabled - Unchecked --- Version Updating Disabled
+                                       No RES Project
+   Enabled - Checked --- Version Control updating enabled
+
+4) Minor fix to the version control setting's tab. Changed the colors to the digit
+   selection for selecting ranges on each digit. This should make it more intuitive
+   for people unfamiliar with how the addin operates...
+
+Hopefully I have covered everything people wanted and not introduced any new bugs! Actually I sent Donkey a copy of the new version a few days ago and he has not found any problems with it so far...
+
+Hope to hear from you soon, Willie
+

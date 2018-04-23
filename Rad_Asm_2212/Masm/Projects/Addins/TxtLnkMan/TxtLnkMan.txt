@@ -1,0 +1,38 @@
+Text Links Manager Addin for RadAsm
+
+	A simple addin to finding an browsing added text links from RadAsm. If you added Note,Bug or ToDo links
+in your sources(Asm and Inc only) you will easily find your link's places in your project. BTW, you may see 
+your main Txt file to check the notes, as a bonus ;)
+	In fact thinking to modify, delete, replace notes,todo etc. from addin dialog but the possible lines 
+which not belongs to any links, is a problem w/o an ending point.
+
+Motivation:
+
+	I think frequently forgetting some notes to do or fix. I can look at .txt to find the added notes etc.
+at first but how will i find them in project? Switching a link somewhere in source code to note in .txt 
+and back to source code is easy by F2 & Ctrl+F2 pair. But if you first look a note in .txt and want to go
+to link is not so easy. Yo must do a find for whole project for a sertain sentence, for example (TODO2:). 
+Now this is easy.
+
+How Works:
+
+	You will add the links from, RadAsm->Project->Create Text Link menu, as usual, yourself. When you need
+to browse this links, will go to RadAsm->Tools->Text Links Manager menu. This will open a dialog which has
+a listview left side and a .txt preview right side. If tou added some links before, this links' names will
+list in listview. If you double click an item, the related page and line will bring up. Now you may use
+F2 and Ctrl+F2 pair to switch as usual, thats all folks :)
+
+Installing Addin:
+
+Put the dll in \Addins folder. Open Addin Manager and install. Or manually,
+
+In RadASM.ini section [Addin] add,
+
+x=TxtLnkMan.dll,y
+
+Where x is next free number any y is the options
+(y=1 enable, y=0 disable).
+
+
+cakmak
+

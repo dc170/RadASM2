@@ -1,0 +1,78 @@
+The CodeSize addin for RadASM allows you to examine, inside the IDE,
+the size of each assembled line of source code. The size is displayed,
+in bytes, next to each line of source.
+
+The addin works only with FASM & MASM projects.
+http://flatassembler.net/
+http://www.masm32.com/
+
+Installation:
+- Copy CodeSize.dll to RadASM's "Addins" directory.
+- Copy CodeSize.txt to RadASM's "Addins/Help" directory.
+- In RadASM open the addin manager by choosing Option->Addin Manager from
+the main menu. Select the CodeSize addin, in the listbox, and click the 
+"Install" and then "Apply" buttons. 
+
+Usage:
+Simply Choose Tools->Get Code Size from the main menu. The size of each
+line will be displayed next to it. To see the size of a procedure or of a
+certain portion of code, collapse the block and the combined size will be
+displayed next to the line into which the other lines are collapsed.
+Before choosing Tools->Get Code Size make sure the project builds
+successfully and that the resource file, if any, is compiled.
+
+Known issues:
+- Because of the way the addin works certain jumps may not be optimized, so
+some short jumps will be displayed as having the size of long jumps.
+- The size displayed next to a "include" directive cannot be trusted. It
+will
+generally be bigger then it should be. If you wish to see what a
+certain file will take up in the assembled output, collapse the entire file
+in one line, inside the IDE.
++MASM specific:
+- The size displayed for the first instruction in a procedure will be the 
+size of the instruction plus the size of the overhead associated with  
+entering the procedure, if any ( setting up a stack frame, saving registers ).
+- The size of data in a '.data?' segment block will be displayed  as being 0.
+
+Notes:
+- If you get a "An unexpected error occurred" message, check all files in
+your project directory to prevent data loss.
++FASM specific:
+- The size of code and data can be zero if they will not be included in the
+output file. A procedure ( and it's instructions ) that is not used in the
+project will be displayed as having no size.
+- If the project assembles successfully inside RadASM, but when choosing
+Tools -> Get code size you get the "Cannot assemble" message, then make
+sure that the paths are set up correctly. Open the fasm.ini file in the
+RadASM directory and make sure that the "$B" entry in the "Paths" group
+points to fasm.exe.
+
+Changelog:
+
+o Version 1.0.0    11-Mar-2007 
+       First release
+
+o Version 1.1.0    15-Mar-2007 
+       - Feature: Added support for MASM projects.
+
+o Version 1.1.1    27-Mar-2007 
+       - Bugfix: Fixed serious win9x compatibility issues. One bug caused
+             project files to be deleted when running under windows 9x.
+
+
+If you experience any problems please contact me.
+
+
+Disclaimer:
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER BE LIABLE FOR ANY DAMAGES
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+POSSIBILITY OF SUCH DAMAGE.
+
+Redistribution:
+Redistribution is permitted only with the author's consent.
+
+Version 1.1.1
+
+Copyright © Alex B. 2007        Alex.B.Dv@Gmail.com

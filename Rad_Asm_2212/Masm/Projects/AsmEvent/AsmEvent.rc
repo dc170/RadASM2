@@ -1,0 +1,17 @@
+// get standard resources
+#include <\masm32\COM\resource\CoLib.rc>
+
+
+// type libraries here, 
+IDD_TypeLib         TypeLib         AsmEvent.tlb
+
+// add subsequent type libraries as such:
+//  IDD_TypeLib + 1     TypeLib         MyCom3.tlb
+//  IDD_TypeLib + 2     TypeLib         MyCom4.tlb
+
+
+// the one and only registrar script
+IDD_RGS_SCRIPT      REGISTRY        AsmEvent.rgs
+
+
+// add additional resouses here starting at ID number 300

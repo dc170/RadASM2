@@ -1,0 +1,66 @@
+[Project]
+Assembler=masm
+Type=Win32 App
+Description=Animation control
+Backup=$P\Bak\
+Group=1
+GroupExpand=1
+
+[MakeDef]
+Menu=1,1,1,1,1,1,1,0
+1=4,O,$B\RC.EXE /v,1
+2=3,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",2
+3=5,O,$B\LINK.EXE /SUBSYSTEM:WINDOWS /RELEASE /VERSION:4.0 /LIBPATH:"$L",3,4
+4=0,0,,5
+5=rsrc.obj,O,$B\CVTRES.EXE,rsrc.res
+6=*.obj,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",*.asm
+
+[MakeFiles]
+0=AviPlay.rap
+1=AviPlay.rc
+2=AviPlay.asm
+3=AviPlay.obj
+4=AviPlay.res
+5=AviPlay.exe
+6=AviPlay.def
+7=AviPlay.dll
+8=AviPlay.txt
+9=AviPlay.lib
+10=AviPlay.mak
+
+[Files]
+1=AviPlay.Asm
+2=AviPlay.Inc
+3=AviPlay.Rc
+4=AviPlay.dlg
+
+[BookMark]
+0=
+1=
+2=
+3=
+4=
+5=
+6=
+7=
+8=
+9=
+
+
+[BreakPoint]
+
+[Size]
+1=0,0,0,0,0
+4=2147483648,2147483648,2147483648,2147483648
+2=2147483648,2147483648,2147483648,2147483648,482
+3=2147483648,2147483648,2147483648,2147483648,78
+
+
+[Resource]
+1=IDR_AVI,100,6,Res\goeye.avi
+
+[Find]
+1="ICC_"
+
+[Version-Inc]
+Options=52

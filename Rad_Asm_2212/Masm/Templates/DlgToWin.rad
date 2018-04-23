@@ -1,0 +1,137 @@
+.386
+.model flat,stdcall		;32 bit memory model
+option casemap:none		;case sensitive
+
+;#########################################################################
+
+include windows.inc
+include kernel32.inc
+include user32.inc
+include Comctl32.inc
+
+includelib user32.lib
+includelib kernel32.lib
+includelib Comctl32.lib
+
+WinMain		PROTO :DWORD,:DWORD,:DWORD,:DWORD
+[*GETPROCNAME*]			PROTO	:HWND,:UINT,:WPARAM,:LPARAM
+
+;#########################################################################
+
+.const
+
+[*DEFCTLID*]
+[*DEFMNUID*]
+
+.data
+
+RichEditDLL						db 'riched20.dll',0
+[*DEFWINCLASS*]
+[*DEFCTLCLASS*]
+[*DEFCTLNAME*]
+[*DEFMNUNAME*]
+[*DEFCTLCAPTION*]
+
+.data?
+
+hInstance						dd ?
+CommandLine						dd ?
+hIcon							dd ?
+hWnd							dd ?
+iccex							INITCOMMONCONTROLSEX <?>
+
+;#########################################################################
+
+.code
+
+start:
+
+	invoke GetModuleHandle, NULL
+	mov		hInstance,eax
+	invoke GetCommandLine
+	mov		CommandLine,eax
+	invoke InitCommonControls
+	mov		iccex.dwSize,sizeof INITCOMMONCONTROLSEX    ;prepare common control structure
+	mov		iccex.dwICC,ICC_DATE_CLASSES
+	invoke InitCommonControlsEx,addr iccex
+	invoke LoadLibrary,addr RichEditDLL
+	mov		hRichEdDLL,eax
+	invoke WinMain,hInstance,NULL,CommandLine,SW_SHOWDEFAULT
+	push	eax
+	invoke FreeLibrary,hRichEdDLL
+	pop		eax
+	invoke ExitProcess,eax
+
+;#########################################################################
+
+WinMain proc hInst:DWORD,hPrevInst:DWORD,CmdLine:DWORD,CmdShow:DWORD
+	LOCAL	wc:WNDCLASSEX
+	LOCAL	msg:MSG
+
+	invoke LoadIcon,NULL,IDI_APPLICATION
+	mov     hIcon,eax
+	mov		wc.cbSize,sizeof WNDCLASSEX
+	mov		wc.style,CS_HREDRAW or CS_VREDRAW
+	mov		wc.lpfnWndProc,offset [*GETPROCNAME*]
+	mov		wc.cbClsExtra,NULL
+	mov		wc.cbWndExtra,NULL
+	push	hInst
+	pop		wc.hInstance
+	mov		wc.hbrBackground,COLOR_BTNFACE+1
+	mov		wc.lpszMenuName,[*GETMNUNAME*]
+	mov		wc.lpszClassName,offset szWinClass
+	push	hIcon
+	pop		wc.hIcon
+	invoke LoadCursor,NULL,IDC_ARROW
+	mov		wc.hCursor,eax
+	push	hIcon
+	pop		wc.hIconSm
+	invoke RegisterClassEx,addr wc
+	[*CREATEWIN*]
+	mov     hWnd,eax
+	invoke ShowWindow,hWnd,SW_SHOWNORMAL
+	invoke UpdateWindow,hWnd
+	.while TRUE
+		invoke GetMessage, addr msg,NULL,0,0
+	  .break .if !eax
+		invoke TranslateMessage, addr msg
+		invoke DispatchMessage, addr msg
+	.endw
+	mov     eax,msg.wParam
+	ret
+
+WinMain endp
+
+;#########################################################################
+
+[*GETPROCNAME*] proc hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
+	LOCAL	rect:RECT
+	LOCAL	hDC:HDC
+	LOCAL	ps:PAINTSTRUCT
+
+	mov		eax,uMsg
+	.if eax==WM_CREATE
+		[*CREATECTL*]
+    .elseif eax==WM_COMMAND
+		mov		eax,wParam
+		mov		edx,eax
+		shr		edx,16
+		and		eax,0FFFFh
+		.if edx==BN_CLICKED
+			[*COMMAND*]
+		.endif
+    .elseif eax==WM_PAINT
+    .elseif eax==WM_CLOSE
+	.elseif eax==WM_DESTROY
+		invoke PostQuitMessage,NULL
+		xor		eax,eax
+		ret
+	.endif
+	invoke DefWindowProc,hWin,uMsg,wParam,lParam
+	ret
+
+[*GETPROCNAME*] endp
+
+;#########################################################################
+
+end start

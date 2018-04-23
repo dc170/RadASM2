@@ -1,0 +1,3 @@
+#include <Res\DragDropMnu.rc>
+#include <Res\DragDropDlg.rc>
+#include "Res/DragDropVer.rc"

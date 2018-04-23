@@ -1,0 +1,15 @@
+Daemon Template by Ulterior 2004 ( ulterior@one.lt )
+
+Features:
+
+ - Standart Application and File logging
+ - Notify icon routines
+ - Thread safe function execution and handling
+
+Notice:
+
+ - You won't be able to shutdown application directly - only from 
+   File->Exit menu choise ( standart daemon app behaviour )
+ - Feel free to change all text and resource constants
+ - Write your own thread pool and have more than one thread function
+

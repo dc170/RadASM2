@@ -1,0 +1,7 @@
+program R_001a;
+#include ( "w.hhf" );
+
+begin R_001a;
+	w.MessageBox( 0, "Qué fácil es programar en Assembler 32 bits",
+		"Ejemplo RadAsm 001a (en RadAsm 2.2.0.9)", w.MB_ICONINFORMATION );
+end R_001a;

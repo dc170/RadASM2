@@ -1,0 +1,108 @@
+This is version 2.2 of Project Builder (PB2)
+
+It can handle multiple source files, multiple output binaries in LIB/DLL/EXE (console and windows)
+form. The dll should be added as other addins are (add it to RadASM\AddIns\ folder and edit the [AddIns] 
+section of RadASM.ini in the main RadASM directory by adding something like "14=pb2.dll,1")
+
+Known Issues:
+- Sometimes the project will not build at all, but when RadASM (and therefore PB) is closed and reopened, 
+  it builds fine [Note: this problem has not been seen for a while and may have been a side effect of 
+  another bug which has now been fixed]
+
+FAQ/HowTo:
+
+What is PB?
+- PB stands for Project Builder
+- It is an AddIn for KetilO's RadASM
+- You can use it to build projects with one or many source files that produce 1 or many binary files.
+- It can create binaries of types LIB, DLL and EXE (both Windows and Console)
+- It currently only supports MASM, but this will hopefully be changed soon
+
+How do i get PB to build my projects?
+- First you must setup the project building options (see below)
+- Then all you have to do, is simply click on the "PB: Build Projects" menu item in the "Project" menu in
+  RAdASM, when you have the appropriate project open
+- The output from the Build will then appear in the output window.
+- Any errors will cause the build to stop with that file
+- You can then double click on the errors to get RadASM to take you to the postion of the error in your 
+  code
+
+How do i set up the project options?
+- First, you must have a project created and open in RadASM
+- Then select the "PB: Edit Project Settings" item in the "Project" menu of RadASM
+- Next you must add the source files to the project (see below)
+- The binaries must then be setup/added (see below)
+- Finaly, just click OK
+
+How do i add source files to my project?
+- Unfortunately, currently source files must be added one at a time
+- To add a source file:
+- Either type in the file name in the "File Name" box in the "Add File" section, or click the "..." 
+  button to get the "Select source file" dialog, where you can select any file that you want
+- When entering the source file names by hand, if the file is in the project directory, only the path 
+  relative to the project directory is needed. However,if it is outside this directory, a fully qualified
+  path is required (eg C:\Projects\QuickProjects\LHT\Src\Hash.asm)
+- Next, click the "Add File" button
+- The file will then appear in the list box to the left
+
+How do i remove source files from the build?
+- Simply select the file that you want to remove in the listbox and then click on the "Delete File" 
+  button (no, this does not delete the file from you HDD)
+- A note should be made that if you remove a source file, but leave it as part of the source for one of 
+  the binaries, when you come to click "OK", the dialog will inform you that this has happened and will
+  not let you exit using "OK" until you have fixed this problem
+
+How do i add a new binary to the project?
+- Just click the "Add Binary" button at the bottom of the dialog
+
+How do i remove a binary from the project?
+- make sure that the tab you have selected is the one that you want to delete, then click on the 
+  "Delete Binary" button
+- note that there must be at least one binary in a project
+
+How do i setup a binary?
+- This depends a lot on what sort of binary you want to create, but some parts are common to all, for the
+  specific parts, see below the "common" section below:
++ Common:
+  # You must enter a name for the binary in the "Binary Name (NO Extension)" field (and as you may guess,
+    don't add the extension (eg .lib) here)
+  # You must add all of the source files needed for this binary to the source file list (above) and then
+    use that to add them to the binary source list:
+    > See above to add source files to the project
+    > To add the source files to the binary, they must be added one by one.
+    > Select the file that you want to add in the source file list at the top of the dialog
+    > Then press the "Add Source File" button
+    > Repeat this until all the source files are added
+  # The output sub directory must be set, this field can be blank in which case, it will appear in the 
+    project directory, or it can specify the subdir where the binary will be placed when built (this MUST
+    be ended with a '\' character)
+  # Type: this is the type of binary that you want to create (its a drop down box, just select the one 
+    that you want)
++ Windows EXE:
+  # no other fields are required, although the "extra switches" field can be used, the current 
+    commandline looks like this:
+    \masm32\bin\Link /OUT:<Output EXE File/Path> /nologo /MACHINE:IX86 /INCREMENTAL:YES /SUBSYSTEM:WINDOWS <Extra Switches> <Input OBJ File/Path List>
++ Console EXE:
+  # Basically the same as the windows EXE, the current commandline is:
+    \masm32\bin\Link /OUT:<Output EXE File/Path> /nologo /MACHINE:IX86 /INCREMENTAL:YES /SUBSYSTEM:CONSOLE <Extra Switches> <Input OBJ File/Path List>
++ DLL:
+  # A DEF file must be specified:
+    > Add the DEF file as a source file as specified above
+    > Select the def file in the source file list
+    > Click the "Use Current Selection" button
+  # Again the "Extra switches" field can be used, current commandline:
+    \masm32\bin\Link /OUT:<Output EXE File/Path> /nologo /MACHINE:IX86 /DLL /INCREMENTAL:YES /DEF:<Input DEF File/Path> /SUBSYSTEM:WINDOWS <Extra Switches> <Input OBJ File/Path List>
++ LIB:
+  #  Similar to EXEs:
+    commandline is as follows ("Extra switches" can be used here as well):
+    \masm32\bin\Link -lib /INCREMENTAL:YES /nologo /OUT:<Output EXE File/Path> <Extra Switches> <Input OBJ File/Path List>
+
+How do i save the changes to the project options?
+- Just click the "OK" button
+
+How do i set a build path?
+- Type it in in the box at the bottom of the dialog (remember the trailing '\')
+
+If you find any bugs (other than those mentioned above) could you please let me know.
+
+Ossa

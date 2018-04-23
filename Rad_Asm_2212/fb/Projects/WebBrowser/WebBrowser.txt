@@ -1,0 +1,5 @@
+WBDll demo
+----------
+To be able to run this demo you must copy WBDll.dll to the project folder or to C:\Windows\System
+
+KetilO

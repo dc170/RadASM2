@@ -1,0 +1,3 @@
+#include "Res/dialogLng.rc"
+#include "Res/dialogDlg.rc"
+#include "Res/dialogRes.rc"

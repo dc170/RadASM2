@@ -1,0 +1,50 @@
+The MsgParam addin for RadASM displays information about the wParam and 
+lParam parameters of message-dispatching functions, as well as providing
+autocomplete for constant values of the two parameters.
+
+
+Behaviour:
+Whenever you call a message-dispatching function with a known message, a
+tooltip will show information about the wParam and lParam  parameters for 
+that specific message. Also if wParam or lParam are constant values, a 
+list will be displayed indicating possible constant values.
+
+
+Notes:
+The MsgParam.msg file contains the information about messages in the
+following format:
+Result=MESSAGE,wparamVal[const1,const2,...],lparamVal[const1,const2,...]
+"Result=" and [const1,const2,...] are optional.
+
+
+Changelog:
+
+o Version 1.0.0    21-Mar-2007 
+       First release
+
+o Version 1.0.1    27-Mar-2007 
+       - Bugfix: Fixed compatibility issues with Windows 9x.
+       - Bugfix: Fixed a bug that permitted both the addin's autocomplete
+             and RadASM's autocomplete to be visible simultaneously.
+       - Bugfix: Fixed a small bug that falsely recognized the message 
+             name.
+
+o Version 1.0.2    14-Apr-2007 
+       - Bugfix: Fixed a bug that caused the autocomplete listbox to 
+             auttomatically get smaller on each startup.
+
+If you experience any problems please contact me.
+
+
+Disclaimer:
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER BE LIABLE FOR ANY DAMAGES
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+POSSIBILITY OF SUCH DAMAGE.
+
+Redistribution:
+Redistribution is permitted only with the author's consent.
+
+Version 1.0.2
+
+Copyright © Alex B. 2007        Alex.B.Dv@Gmail.com

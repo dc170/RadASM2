@@ -1,0 +1,3 @@
+{message box}
+MessageBox(0,"~",0,MB_OK)
+{}

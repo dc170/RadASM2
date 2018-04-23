@@ -1,0 +1,23 @@
+Add Accelerators Table AddIn for RadAsm
+By QvasiModo (Mario Vilas)
+Version 1.00
+Last update 26-Sep-03
+
+-oOo-
+
+  This Addin will generate an accelerators table for your application. The table can be exported to the output window, the current editor window, or the resource script.
+  If the resource script is currently open by RadAsm, please do NOT use the "Export to RC script" button. Doing so will cause the addin to edit the resource script, but RadAsm will keep the old version open. Saving will, naturally, overwrite the code inserted by the addin.
+  The "Export to editor" button uses the currently topmost edit window, and will actually replace the current selection (if any), if there is no selection the text is inserted at the current caret position.
+  The "Export to output" button sends the generated code to output window number 3. It does not previously clear it's contents.
+
+-oOo-
+
+Installing the AddIn:
+    1) Copy AddAccel.Dll to your addin folder (typically C:\RadAsm\AddIns)
+    2) Launch RadAsm, and go to Option -> Addin Manager
+    3) Select AddAccel from the list, click "Install"
+    4) Choose the options you want for the AddIn, then click "OK"
+
+-oOo-
+
+  This program is freeware, and you are free to use, copy or redistribute in any way, provided no modifications are made to the original package, and I am given the proper credit. :)

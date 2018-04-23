@@ -1,0 +1,31 @@
+[Version]
+Version=3000
+[Project]
+Assembler=masm
+Group=2,-1,0,1,MakeFont,-2,-1,1,Assembly,-3,-1,1,Include,-4,-1,1,Misc,-5,-1,1,Resource
+F1=-2,2,1,22,22,600,400,118,MakeFont.asm
+F2=-3,0,1,44,44,600,400,30,MakeFont.inc
+F3=-5,2,4,66,66,600,400,0,MakeFont.rc
+Path=D:\RadASM30
+Open=0,4,3,2
+Api=
+C2=0
+B2=
+M2=
+C3=
+B3=
+M3=
+C1=0
+B1=
+M1=
+F4=-4,0,0,0,0,0,0,0,Font8x10.bmp
+C4=0
+B4=
+M4=
+[Make]
+Make=0
+0=Window Release,'/v "$R"',"$R.res",'/c /coff /Cp "$C"',"$C.obj",'/SUBSYSTEM:WINDOWS /RELEASE /VERSION:4.0 /OUT:$O $C $M $R',"$C.exe",'',
+1=Window Debug,'/v "$R"',"$R.res",'/c /coff /Cp /Zi /Zd "$C"',"$C.obj",'/SUBSYSTEM:WINDOWS /DEBUG /VERSION:4.0 /OUT:$O $C $M $R',"$C.exe",'',
+Delete=0
+IncBuild=0
+Run=0,'',''

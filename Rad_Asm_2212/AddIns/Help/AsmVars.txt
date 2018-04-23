@@ -1,0 +1,63 @@
+; AsmVars - RadASM AddIn
+;
+; Coded by Milos Tziotas, greatly enhanced by KetilO
+;   Web :    http://tziotas.cjb.net
+;            http://darklight-software.cjb.net
+;   Mail:    tziotas@gmx.net
+;   ICQ :    71895226
+;
+; This addin adds AsmVars menu item to the Project menu. When
+; clicked it will run asmvars for the current project and
+; display results in the 2nd output window.
+;
+; Sunday, March 9th, 2003
+
+
+Move AsmVars.exe to \RadAsm\AddIns\AsmVars\
+
+
+Add the Following line to RadASM.INI, [AddIns] secion
+
+XX=AsmVars.dll,1
+
+Where XX is the next available addin number.
+
+--------------------------------------------------
+ASMVARS v1.00a, (c)2001 Jeremy Collake
+http://www.collakesoftware.com
+jeremy@collakesoftware.com
+--------------------------------------------------
+
+This program is designed to scan assembly language projects
+for unreferenced local and global variables. 
+
+USAGE:
+
+  ASMVARS file1 file2 file3 ... [@files.lst] [!datatypes.lst] [-v]
+
+ASMVARS can be provided a list of files on the command line, or
+can read a list of files from a list file (prefixed with '@'). All
+files provided to ASMVARS are treated as a single project. Wildcards 
+are not accepted. The -v switchs puts ASMVARS into verbose mode.
+
+ASMVARS automatically includes files indicated by 'include xxx'
+statements in the source code. Furthermore, ASMVARS automatically
+picks up on STRUCT and UNION datatypes that are defined in the source
+and also handles subsequent EQU's on those datatypes. However, if
+you wish to manually specify datatypes then you can supply ASMVARS
+with a datatypes list file by prefixing that filename with '!'.
+
+Four passes are performed:
+        1 = Scan for INCLUDED files and datatypes.
+        2 = Scan for datatype EQUs.
+        3 = Scan for local variables declarations, local variable 
+            references, and for global variable declarations.
+        4 = Scan for global variable references.
+        
+The return value is the number of unreferenced global and local variables
+found.
+
+Enjoy!
+Jeremy Collake
+
+

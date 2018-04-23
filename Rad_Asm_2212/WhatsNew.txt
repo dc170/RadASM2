@@ -1,0 +1,9 @@
+RadASM 2.2.1.2
+--------------
+2.2.1.2
+o Included several improvements by drizz.
+o Added images to tab select.
+o Added default control sizes to dialog editor.
+o New RadASM icon by Anton Lesnichenko
+
+KetilO

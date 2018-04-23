@@ -1,0 +1,11 @@
+#include "Res/Win32APPLng.rc"
+#include "Res/AboutDlg.rc"
+#include "Res/Win32APPMnu.rc"
+#include "Res/Win32APPRes.rc"
+#include "Res/Win32APPStr.rc"
+
+IDC_WIN32APP ACCELERATORS MOVEABLE PURE
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END

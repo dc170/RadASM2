@@ -1,0 +1,3 @@
+#define IdeasM_ICON						201
+IdeasM_ICON				ICON   DISCARDABLE Res\Sample.ico
+#include <res\TasmTestDlg.rc>

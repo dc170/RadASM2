@@ -1,0 +1,84 @@
+.386
+.model flat, stdcall  ;32 bit memory model
+option casemap :none  ;case sensitive
+
+;#########################################################################
+
+include windows.inc
+includelib import32.lib
+
+[*GETPROCNAME*]		PROCDESC	:DWORD,:DWORD,:DWORD,:DWORD
+
+SetWindowTextA		PROCDESC	WINAPI	:DWORD, :DWORD
+MessageBoxA			PROCDESC	WINAPI	:DWORD, :DWORD, :DWORD, :DWORD
+DialogBoxParamA		PROCDESC	WINAPI	:DWORD, :DWORD, :DWORD, :DWORD, :DWORD
+GetDlgItemTextA		PROCDESC	WINAPI	:DWORD, :DWORD, :DWORD, :DWORD
+SetDlgItemTextA		PROCDESC	WINAPI	:DWORD, :DWORD, :DWORD
+EndDialog			PROCDESC	WINAPI	:DWORD, :DWORD
+ExitProcess			PROCDESC	WINAPI	:DWORD
+GetModuleHandleA	PROCDESC	WINAPI	:DWORD
+LoadIconA			PROCDESC	WINAPI	:DWORD, :DWORD
+SendMessageA		PROCDESC	WINAPI	:DWORD, :DWORD, :DWORD, :DWORD
+FindWindowA			PROCDESC	WINAPI	:DWORD, :DWORD
+GetLastError		PROCDESC	WINAPI
+ExitProcess			PROCDESC	WINAPI	:DWORD
+GetCommandLineA		PROCDESC	WINAPI
+InitCommonControls	PROCDESC	WINAPI
+DialogBoxParamA		PROCDESC	WINAPI	:DWORD, :DWORD, :DWORD, :DWORD, :DWORD
+
+;#########################################################################
+
+.const
+
+[*DEFCTLID*]
+[*DEFMNUID*]
+
+.data?
+
+hInstance						dd ?
+CommandLine						dd ?
+
+;#########################################################################
+
+.code
+
+start:
+
+	call GetModuleHandleA,0
+	mov		hInstance,eax
+	call GetCommandLineA
+	mov		CommandLine,eax
+	call InitCommonControls
+	;Show dialogbox
+	call DialogBoxParamA,hInstance,[*GETWINNAME*],0,\
+		 offset [*GETPROCNAME*],0
+	call ExitProcess,0
+
+;########################################################################
+
+[*GETPROCNAME*] proc hWin:DWORD,uMsg:DWORD,wParam:DWORD,lParam:DWORD
+
+	mov		eax,uMsg
+	.if eax==WM_INITDIALOG
+	.elseif eax==WM_COMMAND
+		mov		eax,wParam
+		mov		edx,eax
+		shr		edx,16
+		and		eax,0FFFFh
+		.if edx==BN_CLICKED
+			[*COMMAND*]
+		.endif
+	.elseif eax==WM_CLOSE
+		call EndDialog,hWin,0
+	.else
+		mov		eax,FALSE
+		ret
+	.endif
+	mov		eax,TRUE
+	ret
+
+[*GETPROCNAME*] endp
+
+;#########################################################################
+
+end start

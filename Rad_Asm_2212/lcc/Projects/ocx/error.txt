@@ -1,0 +1,15 @@
+ocx.cpp:
+ocx.cpp:
+ocx.cpp:
+Error ocx.cpp: 16  undeclared identifier 'RADbg'
+Warning ocx.cpp: 16  Statement has no effect
+Error ocx.cpp: 16  Syntax error; missing semicolon before  `0'
+Warning ocx.cpp: 17  Statement has no effect
+Error ocx.cpp: 17  Syntax error; missing semicolon before  `return'
+Warning ocx.cpp: 16  possible usage of RADbg before definition
+ocx.cpp:
+ocx.cpp:
+ocx.cpp:
+ocx.cpp:
+ocx.cpp:
+ocx.cpp:

@@ -1,0 +1,129 @@
+.386
+.model flat,stdcall
+option casemap:none
+
+;#########################################################################
+
+include windows.inc
+include user32.inc
+include kernel32.inc
+include comctl32.inc
+
+includelib user32.lib
+includelib kernel32.lib
+includelib comctl32.lib
+
+WinMain				PROTO :DWORD,:DWORD,:DWORD,:DWORD
+[*GETPROCNAME*]				PROTO :HWND,:UINT,:WPARAM,:LPARAM
+
+;#########################################################################
+
+.const
+
+[*DEFCTLID*]
+[*DEFMNUID*]
+
+.data
+
+RichEditDLL						db 'riched20.dll',0
+[*DEFWINCLASS*]
+[*DEFMNUNAME*]
+
+.data?
+
+hRichEdDLL						dd ?
+hInstance						dd ?
+CommandLine						dd ?
+hIcon							dd ?
+hWnd							dd ?
+iccex							INITCOMMONCONTROLSEX <?>
+
+;#########################################################################
+
+.code
+
+start:
+
+	invoke GetModuleHandle,NULL
+	mov    hInstance,eax
+	invoke GetCommandLine
+	mov		CommandLine,eax
+	invoke InitCommonControls
+	mov		iccex.dwSize,sizeof INITCOMMONCONTROLSEX    ;prepare common control structure
+	mov		iccex.dwICC,ICC_DATE_CLASSES
+	invoke InitCommonControlsEx,addr iccex
+	invoke LoadLibrary,addr RichEditDLL
+	mov		hRichEdDLL,eax
+	invoke WinMain,hInstance,NULL,CommandLine,SW_SHOWDEFAULT
+	push	eax
+	invoke FreeLibrary,hRichEdDLL
+	pop		eax
+	invoke ExitProcess,eax
+
+WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
+	LOCAL	wc:WNDCLASSEX
+	LOCAL	msg:MSG
+
+	mov		wc.cbSize,SIZEOF WNDCLASSEX
+	mov		wc.style,CS_HREDRAW or CS_VREDRAW
+	mov		wc.lpfnWndProc,offset [*GETPROCNAME*]
+	mov		wc.cbClsExtra,NULL
+	mov		wc.cbWndExtra,DLGWINDOWEXTRA
+	push	hInst
+	pop		wc.hInstance
+	mov		wc.hbrBackground,COLOR_BTNFACE+1
+	mov		wc.lpszMenuName,[*GETMNUNAME*]
+	mov		wc.lpszClassName,offset szWinClass
+	invoke LoadIcon,NULL,IDI_APPLICATION
+	mov		hIcon,eax
+	mov		wc.hIcon,eax
+	mov		wc.hIconSm,eax
+	invoke LoadCursor,NULL,IDC_ARROW
+	mov		wc.hCursor,eax
+	invoke RegisterClassEx,addr wc
+	invoke CreateDialogParam,hInstance,[*GETWINNAME*],NULL,
+		   addr [*GETPROCNAME*],NULL
+	mov		hWnd,eax
+	invoke ShowWindow,hWnd,SW_SHOWNORMAL
+	invoke UpdateWindow,hWnd
+	.while TRUE
+		invoke GetMessage,addr msg,NULL,0,0
+	  .break .if !eax
+		invoke TranslateMessage,addr msg
+		invoke DispatchMessage,addr msg
+	.endw
+	mov		eax,msg.wParam
+	ret
+
+WinMain endp
+
+[*GETPROCNAME*] proc hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
+
+	.if uMsg==WM_INITDIALOG
+		push	hWin
+		pop		hWnd
+	.elseif uMsg==WM_COMMAND
+		mov		eax,wParam
+		mov		edx,eax
+		shr		edx,16
+		and		eax,0FFFFh
+		.if edx==BN_CLICKED
+			[*COMMAND*]
+		.endif
+	.elseif uMsg==WM_CLOSE
+		invoke DestroyWindow,hWin
+	.elseif uMsg==WM_DESTROY
+		invoke PostQuitMessage,NULL
+	.else
+		invoke DefWindowProc,hWin,uMsg,wParam,lParam
+		ret
+	.endif
+	xor    eax,eax
+	ret
+
+[*GETPROCNAME*] endp
+
+;#########################################################################
+
+end start
+

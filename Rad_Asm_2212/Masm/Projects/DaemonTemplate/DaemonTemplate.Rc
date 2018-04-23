@@ -1,0 +1,2 @@
+#include "Res/DaemonTemplateRes.rc"
+#include "Res/DaemonTemplateMnu.rc"

@@ -1,0 +1,2 @@
+#define IDI_ICON						100
+IDI_ICON				ICON     DISCARDABLE "Res/mainicon.ico"

@@ -1,0 +1,4 @@
+#define IDI_WIN32APP					107
+#define IDI_SMALL						108
+IDI_WIN32APP			ICON      DISCARDABLE "Res/Win32APP.ico"
+IDI_SMALL				ICON      DISCARDABLE "Res/small.ico"

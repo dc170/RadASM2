@@ -1,0 +1,87 @@
+.386
+.model flat, stdcall  ;32 bit memory model
+option casemap :none  ;case sensitive
+
+;#########################################################################
+
+include windows.inc
+include kernel32.inc
+include user32.inc
+include comctl32.inc
+
+includelib kernel32.lib
+includelib user32.lib
+includelib comctl32.lib
+
+[*GETPROCNAME*]			PROTO	:HWND,:UINT,:WPARAM,:LPARAM
+
+;#########################################################################
+
+.const
+
+[*DEFCTLID*]
+[*DEFMNUID*]
+
+.data
+
+RichEditDLL						db 'riched20.dll',0
+
+.data?
+
+hInstance						dd ?
+CommandLine						dd ?
+iccex							INITCOMMONCONTROLSEX <?>
+hRichEdDLL						dd ?
+
+;#########################################################################
+
+.code
+
+start:
+
+	invoke GetModuleHandle,NULL
+	mov		hInstance,eax
+	invoke GetCommandLine
+	mov		CommandLine,eax
+	invoke InitCommonControls
+	mov		iccex.dwSize,sizeof INITCOMMONCONTROLSEX    ;prepare common control structure
+	mov		iccex.dwICC,ICC_DATE_CLASSES
+	invoke InitCommonControlsEx,addr iccex
+	invoke LoadLibrary,addr RichEditDLL
+	mov		hRichEdDLL,eax
+	;Show dialogbox
+	invoke DialogBoxParam,hInstance,[*GETWINNAME*],NULL,
+		   addr [*GETPROCNAME*],NULL
+	push	eax
+	invoke FreeLibrary,hRichEdDLL
+	pop		eax
+	invoke ExitProcess,0
+
+;########################################################################
+
+[*GETPROCNAME*] proc hWin:HWND,uMsg:UINT,wParam:WPARAM,lParam:LPARAM
+
+	mov		eax,uMsg
+	.if eax==WM_INITDIALOG
+	.elseif eax==WM_COMMAND
+		mov		eax,wParam
+		mov		edx,eax
+		shr		edx,16
+		and		eax,0FFFFh
+		.if edx==BN_CLICKED
+			[*COMMAND*]
+		.endif
+	.elseif eax==WM_CLOSE
+		invoke EndDialog,hWin,0
+	.else
+		mov		eax,FALSE
+		ret
+	.endif
+	mov		eax,TRUE
+	ret
+
+[*GETPROCNAME*] endp
+
+;#########################################################################
+
+end start

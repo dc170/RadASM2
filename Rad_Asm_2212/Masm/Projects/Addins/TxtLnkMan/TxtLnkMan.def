@@ -1,0 +1,4 @@
+LIBRARY TxtLnkMan.dll
+EXPORTS
+	InstallDll
+	DllProc

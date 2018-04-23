@@ -1,0 +1,62 @@
+To add support for creating drivers (.sys) files follow these steps to modify masm.ini
+
+_______________________________________________________________________________________________________________________________
+
+1. Add the entry marked with '*' to section [MakeFiles] (16=.sys)
+
+[MakeFiles]
+0=.rap
+1=.rc
+2=.asm
+3=.obj
+4=.res
+5=.exe
+6=.def
+7=.dll
+8=.txt
+9=.lib
+10=.mak
+11=.hla
+12=.com
+13=.ocx
+14=.idl
+15=.tlb
+*16=.sys
+
+_______________________________________________________________________________________________________________________________
+
+2. Add the item marked with '*' to section [Project], key Type (,Driver (.sys))
+
+[Project]
+Type=Win32 App,Console App,Dll Project,Ocx Project,LIB Project,NMAKE Project,Win32 App (no res),Dos App,Dos App (.com)*,Driver (.sys)
+
+_______________________________________________________________________________________________________________________________
+
+3. Create new section [Driver (.sys)]
+
+[Driver (.sys)]
+Files=1,1,0,0,0
+Folders=1,0,0
+MenuMake=0,1,1,0,0,0,0,0,0,0
+;x=FileToDelete/CheckExistsOnExit,
+;(O)utput/(C)onsole/0,Command,
+;MakeFile1[,MakeFile2[,MakeFile3...]]
+1=4,O,$B\RC.EXE /v,1
+2=3,O,$B\ML.EXE /nologo /c /coff /I"$I",2
+3=16,O,$B\LINK.EXE /nologo /driver /base:0x10000 /align:32 /subsystem:native /out:"$16",3
+4=0,0,,5
+5=rsrc.obj,O,$B\CVTRES.EXE,rsrc.res
+6=*.obj,O,$B\ML.EXE /c /coff /nologo /I"$I",*.asm
+7=0,0,"$E\OllyDbg",5
+11=4,O,$B\RC.EXE /v,1
+12=3,O,$B\ML.EXE /nologo /c /coff /I"$I",2
+13=16,O,$B\LINK.EXE /nologo /driver /base:0x10000 /align:32 /subsystem:native /out:"$16",3
+14=0,0,,5
+15=rsrc.obj,O,$B\CVTRES.EXE,rsrc.res
+16=*.obj,O,$B\ML.EXE /c /coff /nologo /I"$I",*.asm
+17=0,0,"$E\OllyDbg",5
+_______________________________________________________________________________________________________________________________
+
+Finally copy the file NTDriver.tpl to C:\RadASM\Masm\Templates
+
+KetilO

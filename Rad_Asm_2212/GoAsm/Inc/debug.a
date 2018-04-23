@@ -1,0 +1,432 @@
+;##########################################
+; VKim macros for RadASM
+; Requires GoAsm Version 0.46j or above
+; Translated for GoAsm by Donkey
+; These macros are in the public domain
+;
+;-----------------------------------------------------------------------------
+;DbgDump for MASM is written by Thomas.
+;-----------------------------------------------------------------------------
+;DumpMem, DumpFPU for MASM are written by NaN.
+;-----------------------------------------------------------------------------
+;Float2Str2 by Tim Roberts
+;-----------------------------------------------------------------------------
+; Size of code inserted in bytes (varies depending on parameter type)
+;
+; DbgDump = 20
+; ShowLine = 12
+; DumpFPU = 12
+; PrintLine = 5
+; DumpEFlags = 13
+; ASSERT = 28
+; PrintText = 22
+; PrintString = 22
+; PrintStringByAddr = 22
+; PrintHex = 20
+; PrintDec = 20
+; PrintError = 14
+; PrintDouble = 29
+; TrapException = 192
+; Spy = 111
+; StopSpy = 65
+; Measure = 20
+; EndMeasure = 29
+;
+;##########################################
+
+#IFNDEF DEBUGLIB
+	DEBUGLIB equ \RadASM\GoAsm\lib\Debug.lib
+#ENDIF
+
+#IFNDEF DEBUGEXE
+	DEBUGEXE equ "\RadAsm\GoAsm\lib\dbgwin.exe"
+#ENDIF
+
+
+	PrintHex(ARG)			=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push A"ARG = " \
+									push 1 \
+									push @line \
+									push ARG \
+									call DEBUGLIB:DbgPrintNumber \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintDec(ARG)			=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push A"ARG = " \
+									push 0 \
+									push @line \
+									push ARG \
+									call DEBUGLIB:DbgPrintNumber \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintDouble(ARG)		=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push A"ARG = " \
+									push [ARG+4] \
+									push [ARG] \
+									push @line \
+									call DEBUGLIB:DbgPrintDouble \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintQWORD(ARG)		=		#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push A"ARG = " \
+									push OFFSET ARG \
+									push @line \
+									call DEBUGLIB:DbgPrintQWORD \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintQWORDHex(ARG)		=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push A"ARG = " \
+									push OFFSET ARG \
+									push @line \
+									call DEBUGLIB:DbgPrintQWORDHex \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintError				=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									#IF DBGWIN_SHOWONLYERRORS \
+										push 1 \
+									#ELSE \
+										push 0 \
+									#ENDIF \
+									push @line \
+									call DEBUGLIB:DbgErrorPrint \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintException(ARG)		=	#IF DEBUG_OFF \
+								#ELSE \
+									push ARG \
+									pop eax \
+									push [eax] \
+									call DEBUGLIB:DbgGetExName \
+									push eax \
+									call DEBUGLIB:DbgDebugPrint \
+								#ENDIF
+
+	ASSERT(ARG1,ARG2)		=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push AARG2 \
+									push A"ARG1" \
+									push @line \
+									push ARG1 \
+									call DEBUGLIB:DbgAssert \
+									popfd \
+									popad \
+								#ENDIF
+
+	ShowLine				=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push @line \
+									call DEBUGLIB:DbgDisplayLine \
+									popfd \
+									popad \
+								#ENDIF
+
+	DumpMem(ARG1,ARG2)		=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push @line \
+									push ARG2 \
+									push ARG1 \
+									call DEBUGLIB:DbgDumpDbg \
+									popfd \
+									popad \
+								#ENDIF
+
+	DbgDump(ARG1,ARG2)		=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push @line \
+									push ARG2 \
+									push ARG1 \
+									call DEBUGLIB:DbgDumpDbg \
+									popfd \
+									popad \
+								#ENDIF
+
+	DumpFPU					=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push @line \
+									call DEBUGLIB:DbgFPUDump \
+									popfd \
+									popad \
+								#ENDIF
+
+	DumpMMX					=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push @line \
+									call DEBUGLIB:DbgMMXDump \
+									popfd \
+									popad \
+								#ENDIF
+
+	DumpEFlags				=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									pushfd \
+									cld \
+									push @line \
+									call DEBUGLIB:DbgEFlagDump \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintText(ARG)			=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									#IF STRINGS UNICODE \
+										push 1 \
+									#ELSE \
+										push 0 \
+									#ENDIF \
+									push A"" \
+									push ARG \
+									push @line \
+									call DEBUGLIB:DbgOutputString \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintString(ARG)		=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									#IF STRINGS UNICODE \
+										push 1 \
+									#ELSE \
+										push 0 \
+									#ENDIF \
+									push A"ARG = " \
+									push OFFSET ARG \
+									push @line \
+									call DEBUGLIB:DbgOutputString \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintStringByAddr(ARG)	=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									#IF STRINGS UNICODE \
+										push 1 \
+									#ELSE \
+										push 0 \
+									#ENDIF \
+									push A"ARG = " \
+									push ARG \
+									push @line \
+									call DEBUGLIB:DbgOutputString \
+									popfd \
+									popad \
+								#ENDIF
+
+	PrintLine				= 	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									call DEBUGLIB:DbgPrintSpacer \
+									popad \
+								#ENDIF
+
+	Spy(ARG)				=	#IF DEBUG_OFF \
+								#ELSE \
+									#IF DBGWIN_DEBUG_ON \
+										jmp > \
+										call DEBUGLIB:debug_except_handler \
+										: \
+										cmp D[__fTrap],0 \
+										jnz >L1 \
+										pushad \
+										push 256 \
+										push 0040H \
+										call GlobalAlloc \
+										mov ebx,eax \
+										push A"Spying ARG" \
+										push @line \
+										push ebx \
+										call DEBUGLIB:DbgFormatLine \
+										push ebx \
+										call DEBUGLIB:DbgDebugPrint \
+										push ebx \
+										call GlobalFree \
+										popad \
+										push eax \
+										mov D[__pVar],OFFSET ARG \
+										push OFFSET debug_except_handler \
+										FS push [0] \
+										FS mov [0],esp \
+										mov D[__fTrap],1 \
+										pushfw \
+										popw ax \
+										or ax,100h \
+										pushw ax \
+										popfw \
+										L1: \
+										or eax,eax \ ; This forces the first single step
+									#ENDIF \
+								#ENDIF
+
+	StopSpy					=	#IF DEBUG_OFF \
+								#ELSE \
+									#IF DBGWIN_DEBUG_ON \
+										mov D[__fTrap] ,0 \
+										mov eax,[esp] \
+										FS mov [0],esp \
+										add esp,8 \
+										pop eax \
+										pushad \
+										push 256 \
+										push 0040H \
+										call GlobalAlloc \
+										mov ebx,eax \
+										push A"End Spy" \
+										push @line \
+										push ebx \
+										call DEBUGLIB:DbgFormatLine \
+										push ebx \
+										call DEBUGLIB:DbgDebugPrint \
+										push ebx \
+										call GlobalFree \
+										popad \
+									#ENDIF \
+								#ENDIF
+
+	TrapException(ARG)		=	#IF DEBUG_OFF \
+								#ELSE \
+									#IF DBGWIN_DEBUG_ON \
+										pushad \
+										jmp > \
+										call DEBUGLIB:TrapEx_seh \
+										: \
+										push OFFSET vkimdll \
+										call LoadLibraryA \
+										mov [__hLib], eax \
+										call GetCurrentProcess \
+										mov [__hInst], eax \
+										push offset vkiminit \
+										push [__hLib] \
+										call GetProcAddress \
+										mov [__pSymInit], eax \
+										push offset vkimsetopt \
+										push [__hLib] \
+										call GetProcAddress \
+										mov [__pSymOpt], eax \
+										push offset vkimgetline \
+										push [__hLib] \
+										call GetProcAddress \
+										mov [__pGetLine], eax \
+										cmp D[__hLib],0 \
+										jz >L1 \
+										push 10h \
+										call [__pSymOpt] \
+										push 1 \
+										push 0 \
+										push [__hInst] \
+										call [__pSymInit] \
+										popad \
+										mov [__esp], esp \
+										push offset TrapEx_seh \
+										FS push [0] \
+										push esp \
+										FS pop [0] \
+										push ARG \
+										pop [__eh] \
+										pushfw  \
+										popw ax \
+										or ax, 100h \
+										pushw ax \
+										popfw \
+										jmp >L2 \
+										L1: \
+										push OFFSET vkimloaderr \
+										call DEBUGLIB:DbgDebugPrint \
+										popad \
+										L2: \
+									#ENDIF \
+								#ENDIF
+
+	Measure					=	#IF DEBUG_OFF \
+								#ELSE \
+									#IFNDEF dbgmeasure \
+										DATA SECTION \
+										dbgmeasure		dd	0 \
+										dbgmeasureline	dd	0 \
+										CODE SECTION \
+									#ENDIF \
+									mov [dbgmeasure],$+20 \
+									mov D[dbgmeasureline],@line+1 \
+								#ENDIF
+
+	EndMeasure				=	#IF DEBUG_OFF \
+								#ELSE \
+									pushad \
+									pushfd \
+									cld \
+									push @line-1 \
+									push [dbgmeasureline] \
+									push $-11 \
+									push [dbgmeasure] \
+									call DEBUGLIB:DbgEndMeasure \
+									popfd \
+									popad \
+								#ENDIF
+
+.data
+;	#IF DEBUG_OFF
+		szDbgCommandLine		db	DEBUGEXE,0
+;	#ENDIF

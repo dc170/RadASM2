@@ -1,0 +1,8 @@
+lib\rahexed.lib
+kernel32.lib
+comctl32.lib
+user32.lib
+gdi32.lib
+comdlg32.lib
+shell32.lib
+winmm.lib

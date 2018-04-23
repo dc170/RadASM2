@@ -1,0 +1,2 @@
+#include <Res\MainDlg.rc>
+#include "Res/DialogBoxVer.rc"

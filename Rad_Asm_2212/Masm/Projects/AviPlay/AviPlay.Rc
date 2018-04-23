@@ -1,0 +1,3 @@
+#define IDR_AVI							100
+IDR_AVI					AVI    DISCARDABLE Res\goeye.avi
+#include <Res\AviPlayDlg.rc>

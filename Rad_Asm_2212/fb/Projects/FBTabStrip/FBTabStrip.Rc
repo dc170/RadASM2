@@ -1,0 +1,3 @@
+#include "Res/FBTabStripDlg.rc"
+#include "Res/FBTabStrip1Dlg.rc"
+#include "Res/FBTabStrip2Dlg.rc"

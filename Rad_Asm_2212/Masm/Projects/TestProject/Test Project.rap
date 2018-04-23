@@ -1,0 +1,129 @@
+[Project]
+Assembler=masm
+Type=Win32 App
+Description=Test Project
+Backup=$P\Bak\
+Group=1
+GroupExpand=1
+Debug=0
+[MakeDef]
+Menu=1,1,1,1,1,1,1,0
+1=4,OT,$B\RC.EXE /v,1
+2=3,OT,$B\ML.EXE /c /coff /Cp /nologo /I"$I",2
+3=5,OT,$B\LINK.EXE /SUBSYSTEM:WINDOWS /RELEASE /VERSION:4.0 /LIBPATH:"$L",3,4
+4=0,0,,5
+5=rsrc.obj,O,$B\CVTRES.EXE,rsrc.res
+6=*.obj,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",*.asm
+11=4,O,$B\RC.EXE /v,1
+12=3,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",2
+13=5,O,$B\LINK.EXE /SUBSYSTEM:WINDOWS /DEBUG /VERSION:4.0 /LIBPATH:"$L",3,4
+14=0,0,,5
+15=rsrc.obj,O,$B\CVTRES.EXE,rsrc.res
+16=*.obj,O,$B\ML.EXE /c /coff /Cp /nologo /I"$I",*.asm
+[MakeFiles]
+0=Test Project.rap
+1=Test Project.rc
+2=Test Project.asm
+3=Test Project.obj
+4=Test Project.res
+5=Test Project.exe
+6=Test Project.def
+7=Test Project.dll
+8=Test Project.txt
+9=Test Project.lib
+10=Test Project.mak
+[Files]
+1=Test Project.Asm
+2=Test Project.Inc
+3=Test Project.Rc
+4=Test Project.dlg
+[BookMark]
+0=
+1=
+2=
+3=
+4=
+5=
+6=
+7=
+8=
+9=
+[Size]
+1=0,0,0,0,437
+3=2147483648,2147483648,2147483648,2147483648,35
+4=0,0,0,0
+2=2147483648,2147483648,2147483648,2147483648,357
+[VerInf]
+Nme=VERINF1
+ID=1
+FV=1.0.0.0
+PV=1.0.0.0
+VerOS=0x00000004
+VerFT=0x00000000
+VerLNG=0x00000409
+VerCHS=0x000004B0
+ProductVersion=1.0.0
+ProductName=
+OriginalFilename=
+LegalTrademarks=
+LegalCopyright=
+InternalName=
+FileDescription=
+FileVersion=1.0.0
+CompanyName=
+[BreakPoint]
+0=1,33,hInstance
+1=1,35,uMsg
+2=1,36,offset hInstance
+3=1,37,hWin
+4=1,39,
+[Group]
+Group=Added files,Assembly,Resources,Misc,Modules
+1=2
+2=2
+3=3
+4=3
+[VersionControl]
+Settings=1246
+Milestones=129
+MilestoneEvery=10
+MilestoneEveryCurrent=0
+MilestoneOnBuild=0.0.0.0
+MilestoneOnTime=2
+MilestoneOnDate=0
+MilestoneOnDateWhen=1
+MilestoneOnDateStatus=0
+MilestoneOnDateDate=19
+MilestoneOnDateTimeYear=2005
+MilestoneOnDateTimeMonth=8
+MilestoneOnDateTimeDate=13
+MilestoneOnDateTimeHour=21
+MilestoneOnDateTimeMin=50
+MilestoneOnDateTimeSec=33
+MilestoneOnDateTimeStatus=0
+BackupLocation=C:\RadASM\Masm\Projects\VCBackups\
+CompressionLevel=0
+DefaultComment=Project $N, $Z, Backup Created On $D At $T.
+ExcludeExt1=\
+ExcludeExt2=\
+ExcludeExt3=\
+ExcludeExt4=\
+FileVerLength=4
+FileVer2Range=0
+FileVer3Range=0
+FileVer4Range=0
+ProductVerLength=4
+ProductVer2Range=0
+ProductVer3Range=0
+ProductVer4Range=0
+[Colref]
+0=00FFFFFF
+1=00FFFFFF
+2=00FFFFFF
+3=00FFFFFF
+4=00FFFFFF
+5=00FFFFFF
+6=00FFFFFF
+7=00FFFFFF
+[Collapse]
+1=

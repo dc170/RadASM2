@@ -1,0 +1,48 @@
+#IFNDEF RADebug
+;##################################################################
+;Use with version 1.0.0.3 of RADbg.dll (requires special version for now)
+RADBG STRUCT
+	_err	dd
+	_edi	dd
+	_esi	dd
+	_ebp	dd
+	_esp	dd
+	_ebx	dd
+	_edx	dd
+	_ecx	dd
+	_eax	dd
+	_efl	dd
+	_eip	dd
+	_var	dd
+	nid		dd
+ENDS
+
+DBG_COPYDATA	equ 4Ah ; WM_COPYDATA renamed so there is no conflict and no includes are nec.
+
+RADbg(rabpid,rahwnd,ravar) = 	push rahwnd	\
+								push rabpid	\
+								push ravar	\
+								call RADebug
+
+.CODE
+
+RADebug:
+	pushfd
+	pushad
+	INVOKE GetLastError
+	push	eax
+	mov		ebx,[esp+sizeof RADBG]
+	push	esp
+	push	sizeof RADBG
+	push	0
+	INVOKE SendMessageA,ebx,DBG_COPYDATA,-1,esp
+	add		esp,12
+	test eax,eax
+	jnz >
+	INVOKE ExitProcess,0
+	:
+	pop		eax
+	popad
+	popfd
+	ret 12
+#ENDIF

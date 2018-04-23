@@ -1,0 +1,122 @@
+[Project]
+Assembler=Lcc
+Type=Win32 App
+Description=Win32
+Backup=$P\Bak\
+Group=1
+GroupExpand=1
+Debug=0
+[Files]
+1=Win32.cpp
+2=Win32.h
+3=Win32.Rc
+[MakeFiles]
+0=Win32.rap
+1=Win32.rc
+2=Win32.cpp
+3=Win32.obj
+4=Win32.res
+5=Win32.exe
+6=Win32.def
+7=Win32.dll
+8=Win32.txt
+9=Win32.lib
+10=Win32.mak
+11=Win32.c
+12=Win32.com
+13=Win32.ocx
+14=Win32.idl
+15=Win32.tlb
+[Resource]
+1=IDI_MAINICO,100,2,Res\MAINICO.ico
+[StringTable]
+[Accel]
+[VerInf]
+[Group]
+Group=Added files,Assembly,Resources,Misc,Modules
+1=2
+2=2
+3=3
+4=
+[MakeDef]
+Menu=1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0
+1=4,O,$B\LRC.EXE /v,1
+2=3,O,$B\LCC.EXE /O /unused /c /errout=error.txt /I"$I",2
+3=5,O,$B\LCCLNK.EXE /s /SUBSYSTEM WINDOWS /o "$5",3,4
+4=0,0,,5
+5=rsrc.obj,O,$D\CVTRES.EXE,rsrc.res
+6=*.obj,O,$B\LCC.EXE /O /unused /c /errout=error.txt /I"$I",*.cpp
+7=0,0,"$E\OllyDbg",5
+11=4,O,$B\LRC.EXE /v,1
+12=3,O,$B\LCC.EXE /g2 /O /unused /c /errout=error.txt /I"$I",2
+13=5,O,$B\LCCLNK.EXE /SUBSYSTEM WINDOWS /o "$5",3,4
+14=0,0,,5
+15=rsrc.obj,O,$D\CVTRES.EXE,rsrc.res
+16=*.obj,O,$B\LCC.EXE /g2 /O /unused /c /errout=error.txt /I"$I",*.cpp
+17=0,0,"$E\OllyDbg",5
+[VersionControl]
+Settings=1246
+重要事件=129
+MilestoneEvery=10
+MilestoneEveryCurrent=0
+MilestoneOnBuild=0.0.0.0
+MilestoneOnTime=2
+MilestoneOnDate=0
+MilestoneOnDateWhen=1
+MilestoneOnDateStatus=0
+MilestoneOnDateDate=9
+MilestoneOnDateTimeYear=2005
+MilestoneOnDateTimeMonth=11
+MilestoneOnDateTimeDate=5
+MilestoneOnDateTimeHour=22
+MilestoneOnDateTimeMin=35
+MilestoneOnDateTimeSec=18
+MilestoneOnDateTimeStatus=0
+BackupLocation=E:\RadASM\Lcc\Projects\VCBackups\
+CompressionLevel=0
+DefaultComment=工程 $N, $Z, 备份创建于 $D 在 $T.
+ExcludeExt1=\
+ExcludeExt2=\
+ExcludeExt3=\
+ExcludeExt4=\
+FileVerLength=4
+FileVer2Range=0
+FileVer3Range=0
+FileVer4Range=0
+ProductVerLength=4
+ProductVer2Range=0
+ProductVer3Range=0
+ProductVer4Range=0
+Milestones=129
+[Colref]
+0=00FFFFFF
+1=00FFFFFF
+2=00FFFFFF
+3=00FFFFFF
+4=00FFFFFF
+5=00FFFFFF
+6=00FFFFFF
+7=00FFFFFF
+[PTimer]
+PTimer=64933
+[Collapse]
+1=
+2=
+3=
+[Size]
+1=0,0,0,0,1730
+2=0,0,0,0,0
+3=0,0,0,0,0
+[BookMark]
+0=
+1=
+2=
+3=
+4=
+5=
+6=
+7=
+8=
+9=
+[BreakPoint]
+0=

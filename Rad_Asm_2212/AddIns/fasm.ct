@@ -1,0 +1,9 @@
+{push regs}
+push ebx edi esi
+~
+pop edi esi ebx
+{.data}
+section '.data' data readable writeable
+{.code}
+section '.code' code readable executable
+{}

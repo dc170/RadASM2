@@ -1,0 +1,2 @@
+#include "Res/WinResRes.rc"
+#include "Res/WinResMnu.rc"

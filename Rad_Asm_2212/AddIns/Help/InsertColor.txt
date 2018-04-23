@@ -1,0 +1,12 @@
+Eviloid, 2oo2 <eviloid@mail.ru>
+
+Copy InsertColor.dll to \RadASM\AddIns
+then add:
+
+x=InsertColor.dll,y
+
+to [AddIns] section of RadASM.ini, replace x with next unused number.
+Replace y with number:
+    0 = off
+    1 = with dialog
+    2 = Quick insert (as hex to editor or clipboard)
